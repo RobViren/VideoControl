@@ -37,6 +37,7 @@ class App extends Component {
 
     var promise = new Promise((resolve, reject) => {
       resp.then(res => {
+        console.log(res)
         resolve(url)
       }).catch(error => {
         reject("Not A Camera")
@@ -48,8 +49,13 @@ class App extends Component {
 
   scan = () => {
     let IPs = [];
+    let local = this.state.localIP
+    while(local.charAt(local.length-1) !== '.'){
+      local = local.substring(0, local.length - 1);
+    }
     for(var i = 0; i < 255; i++){
-      this.getURL("http://192.168.0." + i + ":3000").then(res => {
+      this.getURL("http://" + local + i + "/").then(res => {
+      //this.getURL("http://" + host + "/").then(res => {
         IPs.push(res)
         this.setState({
           cameraIPs: IPs
@@ -77,11 +83,11 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Welcome {this.state.localIP}</h2>
-          {this.state.cameraIPs.map((obj,i) => (
-            <div> {obj} </div>
-          ))}
-
+          <h3>Possible Cameras On Network</h3>
         </div>
+        {this.state.cameraIPs.map((obj,i) => (
+          <div> {obj} </div>
+        ))}
       </div>
     );
   }
