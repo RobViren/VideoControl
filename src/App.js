@@ -86,7 +86,7 @@ class App extends Component {
           <h3>Possible Cameras On Network</h3>
         </div>
         {this.state.cameraIPs.map((obj,i) => (
-          <div> {obj} </div>
+          <div><a href={obj.substring(0,obj.indexOf(":443"))} target="_blank" > {obj.substring(0,obj.indexOf(":443"))} </a></div>
         ))}
       </div>
     );
