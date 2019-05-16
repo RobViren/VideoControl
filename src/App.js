@@ -54,7 +54,7 @@ class App extends Component {
       local = local.substring(0, local.length - 1);
     }
     for(var i = 0; i < 255; i++){
-      this.getURL("http://" + local + i + ":443").then(res => {
+      this.getURL("https://" + local + i + ":443").then(res => {
       //this.getURL("http://10.1.2." + i + ":443").then(res => {
         IPs.push(res)
         this.setState({
